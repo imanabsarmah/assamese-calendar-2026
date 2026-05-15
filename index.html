@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="as">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Assamese Calendar 2026 with Tithi, Purnima and Amabasya dates. অসমীয়া কেলেণ্ডাৰ ২০২৬।" />
+  <title>অসমীয়া কেলেণ্ডাৰ ২০২৬ — Assamese Calendar 2026</title>
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Site Header ── -->
+  <header class="site-header">
+    <div>
+      <h1>অসমীয়া কেলেণ্ডাৰ</h1>
+      <div class="subtitle">Assamese Calendar · Tithi · Purnima · Amabasya</div>
+    </div>
+    <div class="header-year" aria-hidden="true">2026</div>
+  </header>
+
+  <!-- ── Controls ── -->
+  <div class="controls">
+    <button class="nav-btn" id="btnPrev" aria-label="Previous month" title="Previous month (←)">&#8249;</button>
+    <select id="monthSelect" aria-label="Select month"></select>
+    <button class="nav-btn" id="btnNext" aria-label="Next month" title="Next month (→)">&#8250;</button>
+    <button class="today-btn" id="btnToday">Today</button>
+  </div>
+
+  <!-- ── Calendar ── -->
+  <main class="cal-wrapper">
+
+    <div class="month-heading">
+      <div>
+        <div class="month-name-en" id="monthNameEn"></div>
+        <div class="month-name-as" id="monthNameAs"></div>
+      </div>
+      <div class="saka-label" id="sakaLabel"></div>
+    </div>
+
+    <div class="calendar-grid">
+      <!-- Day header row -->
+      <div class="day-headers" id="dayHeaders"></div>
+      <!-- Day cells -->
+      <div class="days-grid" id="daysGrid"></div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#2D1B69;"></div>
+        <span>Today</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#E8F5EE; border:1px solid #15803D;"></div>
+        <span>পূৰ্ণিমা Purnima (Full Moon)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#FFF0EB; border:1px solid #C9410B;"></div>
+        <span>অমাবস্যা Amabasya (New Moon)</span>
+      </div>
+      <div class="legend-item" style="margin-left:auto; color:#C9410B;">
+        Sunday
+      </div>
+      <div class="legend-item" style="color:#2D1B69;">
+        Saturday
+      </div>
+    </div>
+
+    <!-- About section -->
+    <details style="margin-top:24px; font-size:13px; color:#7A6F66; line-height:1.7;">
+      <summary style="cursor:pointer; font-weight:500; color:#2D1B69; margin-bottom:8px;">About this calendar</summary>
+      <p>This is the <strong>Assamese Calendar 2026</strong> (অসমীয়া কেলেণ্ডাৰ ২০২৬), showing all twelve months with their corresponding <strong>Assamese (Saka) dates</strong> and <strong>Tithi</strong> (lunar day) information sourced from the traditional Assamese Panjika.</p>
+      <br/>
+      <p>The Assamese calendar is a solar sidereal calendar used in Assam, India. Each Gregorian month displays the corresponding Assamese month names in the Saka era (শক সম্বৎ). The year 2026 CE spans Saka years <strong>১৪৩২–১৪৩৩</strong>.</p>
+      <br/>
+      <p><strong>Navigation:</strong> Use the ‹ › buttons, the dropdown, or your keyboard arrow keys (← →) to switch months.</p>
+    </details>
+
+  </main>
+
+  <!-- ── Scripts ── -->
+  <script src="js/data.js"></script>
+  <script>
+    // Build day header row
+    (function () {
+      const headers = [
+        { as: "দেও", en: "Sun" },
+        { as: "সোম", en: "Mon" },
+        { as: "মঙল", en: "Tue" },
+        { as: "বুধ", en: "Wed" },
+        { as: "বৃহ", en: "Thu" },
+        { as: "শুকুৰ", en: "Fri" },
+        { as: "শনি", en: "Sat" }
+      ];
+      const container = document.getElementById("dayHeaders");
+      headers.forEach(h => {
+        const el = document.createElement("div");
+        el.className = "day-header-cell";
+        el.innerHTML = `${h.as}<div class="dh-en">${h.en}</div>`;
+        container.appendChild(el);
+      });
+    })();
+  </script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
