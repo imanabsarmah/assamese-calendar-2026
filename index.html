@@ -1,111 +1,644 @@
 <!DOCTYPE html>
-<html lang="as">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Assamese Calendar 2026 with Tithi, Purnima and Amabasya dates. অসমীয়া কেলেণ্ডাৰ ২০২৬।" />
-  <title>অসমীয়া কেলেণ্ডাৰ ২০২৬ — Assamese Calendar 2026</title>
-
-  <!-- Favicon inline SVG -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
-
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>অসমীয়া বৰ্ষপঞ্জী 2026 · Assamese Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Hind+Siliguri:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a0a00;--ink2:#3d2010;--ink3:#6b3d20;
+  --parchment:#fdf4e3;--parchment2:#faecd0;--parchment3:#f5ddb8;
+  --red:#b5290f;--red2:#d4401e;--red3:#f0896a;
+  --gold:#c4870a;--gold2:#e8a820;--gold3:#f5c842;
+  --green:#1a5c2a;--green2:#2e8b45;
+  --teal:#0a5555;--purple:#4a1a6b;--orange:#c45a10;
+  --border:#e0c89a;--border2:#cdb07a;
+  --shadow:rgba(90,40,10,0.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;overflow-x:hidden}
+.bg-pattern{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(196,135,10,.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(181,41,15,.07) 0%,transparent 55%),var(--parchment);pointer-events:none}
+.wrapper{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 20px 60px}
+header{text-align:center;padding:44px 20px 28px;position:relative}
+.header-ornament{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:16px}
+.ornament-line{height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold2))}
+.ornament-line.r{background:linear-gradient(90deg,var(--gold2),transparent)}
+.ornament-symbol{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold2);letter-spacing:6px}
+.header-assamese{font-family:'Hind Siliguri',sans-serif;font-size:15px;font-weight:500;color:var(--red);letter-spacing:2px;margin-bottom:10px}
+header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,60px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-1px}
+header h1 em{font-style:italic;color:var(--red);font-weight:400}
+.header-year{display:inline-block;background:var(--red);color:#fff;font-size:12px;font-weight:600;letter-spacing:3px;padding:4px 14px;border-radius:2px;margin-top:12px}
+.header-sub{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink3);margin-top:10px}
+.gad-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--green);font-weight:600;margin-top:10px;letter-spacing:.5px}
+.gad-badge::before{content:"✓";background:var(--green);color:#fff;width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0}
+.divider-line{flex:1;height:1px;background:var(--border)}
+.divider-diamond{width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);flex-shrink:0}
+/* YEAR STRIP */
+.year-strip{display:grid;grid-template-columns:repeat(12,1fr);border:1px solid var(--border2);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.strip-month{text-align:center;padding:10px 4px 8px;background:var(--parchment2);border-right:1px solid var(--border);cursor:pointer;transition:background .2s}
+.strip-month:last-child{border-right:none}
+.strip-month:hover{background:var(--parchment3)}
+.strip-month.active{background:var(--red);color:#fff}
+.strip-month-name{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.strip-month.active .strip-month-name{color:#fff}
+.strip-month:not(.active) .strip-month-name{color:var(--ink3)}
+.strip-asm-name{font-family:'Hind Siliguri',sans-serif;font-size:10px;display:block;margin-top:3px}
+.strip-month.active .strip-asm-name{color:rgba(255,255,255,.85)}
+.strip-month:not(.active) .strip-asm-name{color:var(--ink3)}
+.strip-dots{display:flex;justify-content:center;gap:2px;margin-top:5px;min-height:6px}
+.strip-dot{width:5px;height:5px;border-radius:50%}
+/* VIEW TOGGLE */
+.view-toggle-wrap{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.view-toggle{display:flex;border:1px solid var(--border2);border-radius:8px;overflow:hidden}
+.toggle-btn{background:none;border:none;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:var(--ink3);cursor:pointer;border-right:1px solid var(--border2);transition:all .2s;letter-spacing:.5px}
+.toggle-btn:last-child{border-right:none}
+.toggle-btn.active{background:var(--red);color:#fff}
+.toggle-btn:not(.active):hover{background:var(--parchment2)}
+/* CALENDAR */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.nav-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--border2);border-radius:6px;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .2s}
+.nav-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.cal-month-title{text-align:center}
+.cal-month-eng{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--ink);line-height:1}
+.cal-month-meta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px}
+.cal-month-asm{font-family:'Hind Siliguri',sans-serif;font-size:16px;color:var(--red);font-weight:500}
+.cal-month-saka{font-size:12px;color:var(--ink3);font-style:italic;font-family:'Cormorant Garamond',serif}
+.calendar-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px var(--shadow)}
+.cal-header-row{display:grid;grid-template-columns:repeat(7,1fr);background:var(--ink)}
+.cal-header-cell{text-align:center;padding:12px 4px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#e8d4b8}
+.cal-header-cell.sun{color:var(--red3)}
+.cal-header-cell.sat{color:#b8c8e8}
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-cell{min-height:92px;border-right:.5px solid var(--border);border-bottom:.5px solid var(--border);padding:9px 9px 7px;transition:background .15s;position:relative}
+.cal-cell:nth-child(7n){border-right:none}
+.cal-cell:hover:not(.empty):not(.today-cell){background:#fffbf5}
+.cal-cell.empty{background:var(--parchment);opacity:.5}
+.cal-cell.today-cell{background:#fff8f5}
+.cal-cell.holiday-cell{background:#fffdf5}
+.cal-cell.restricted-cell{background:#f8f8ff}
+.cell-greg{font-size:15px;font-weight:600;color:var(--ink);line-height:1}
+.cal-cell.sun-cell .cell-greg{color:var(--red)}
+.cal-cell.sat-cell .cell-greg{color:#3050a0}
+.today-circle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;font-weight:700}
+.cell-asm{font-family:'Hind Siliguri',sans-serif;font-size:10px;color:var(--ink3);margin-top:2px;line-height:1.2;opacity:.8}
+.cell-tags{margin-top:5px;display:flex;flex-direction:column;gap:2px}
+.ftag{font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ftag-bihu{background:#fde8c0;color:#7a3800}
+.ftag-national{background:#dff0df;color:#1a4a28}
+.ftag-religious{background:#ede8f8;color:#3a1870}
+.ftag-regional{background:#fde0e0;color:#7a1a1a}
+.ftag-special{background:#deedf8;color:#0a3a68}
+.ftag-restricted{background:#f0f0ff;color:#303080;border-left:2px solid #8080cc}
+.ftag-halfday{background:#fff8e0;color:#605000;border-left:2px dashed var(--gold)}
+.ftag-bank{background:#e8f8e8;color:#1a5a1a;border-left:2px solid var(--green)}
+/* BOTTOM PANEL */
+.bottom-panel{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.panel-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 2px 12px var(--shadow)}
+.panel-card h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.panel-icon{width:20px;height:20px;background:var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.panel-icon svg{width:12px;height:12px;fill:#fff}
+.fest-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:.5px solid var(--border)}
+.fest-item:last-child{border-bottom:none}
+.fest-item-date{min-width:34px;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--red);line-height:1;padding-top:2px}
+.fest-item-body{flex:1}
+.fest-item-name{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
+.fest-item-asm{font-family:'Hind Siliguri',sans-serif;font-size:11px;color:var(--ink3);margin-top:1px}
+.fest-item-badge{font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:10px;text-transform:uppercase;flex-shrink:0;margin-top:3px;align-self:flex-start}
+.badge-bihu{background:#fde8c0;color:#7a3800}
+.badge-national{background:#dff0df;color:#1a4a28}
+.badge-religious{background:#ede8f8;color:#3a1870}
+.badge-regional{background:#fde0e0;color:#7a1a1a}
+.badge-special{background:#deedf8;color:#0a3a68}
+.badge-restricted{background:#f0f0ff;color:#303080}
+.badge-halfday{background:#fff8e0;color:#605000}
+.badge-bank{background:#e8f8e8;color:#1a5a1a}
+/* SEASON */
+.season-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--ink)}
+.season-asm{font-family:'Hind Siliguri',sans-serif;font-size:17px;color:var(--red);margin-top:2px}
+.season-desc{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink3);margin-top:10px;line-height:1.6}
+.bihu-callout{background:linear-gradient(135deg,#fff5e0,#fff0d8);border:1px solid #e8c878;border-radius:10px;padding:14px 16px;margin-top:14px}
+.bihu-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.bihu-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--orange)}
+.bihu-asm{font-family:'Hind Siliguri',sans-serif;font-size:14px;color:var(--ink3);margin-top:2px}
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;padding:14px 18px;background:#fff;border:1px solid var(--border);border-radius:10px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--ink3)}
+.legend-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+/* YEAR GRID */
+.year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mini-month{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.mini-month:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow)}
+.mini-header{background:var(--ink);padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
+.mini-eng{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#e8d4b8}
+.mini-asm{font-family:'Hind Siliguri',sans-serif;font-size:11px;color:var(--red3)}
+.mini-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:6px 4px 8px;gap:1px}
+.mini-day-header{text-align:center;font-size:7.5px;font-weight:700;letter-spacing:.5px;color:var(--ink3);padding:2px 0;text-transform:uppercase}
+.mini-day-header.s{color:var(--red)}
+.mini-cell{text-align:center;font-size:9px;padding:2px 1px;border-radius:3px;color:var(--ink);font-weight:500}
+.mini-cell.empty{color:transparent}
+.mini-cell.has-fest{background:#fde8c0;color:#7a3800;font-weight:700}
+.mini-cell.today-mini{background:var(--red);color:#fff;border-radius:50%;font-weight:700}
+.mini-cell.sun-mini{color:var(--red)}
+/* TABS */
+.fest-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.fest-tab{background:none;border:none;padding:6px 12px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;border-right:1px solid var(--border);transition:all .15s;white-space:nowrap}
+.fest-tab:last-child{border-right:none}
+.fest-tab.active{background:var(--red);color:#fff}
+.fest-tab:not(.active):hover{background:var(--parchment2)}
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease forwards}
+/* FOOTER */
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+.footer-text{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink3)}
+@media(max-width:700px){
+  .bottom-panel{grid-template-columns:1fr}
+  .year-grid{grid-template-columns:repeat(2,1fr)}
+  .year-strip{grid-template-columns:repeat(6,1fr)}
+  .year-strip .strip-month:nth-child(n+7){display:none}
+  header h1{font-size:28px}
+  .fest-tabs{flex-wrap:wrap}
+}
+@media print{
+  .bg-pattern,.view-toggle-wrap,.cal-nav,.year-strip{display:none!important}
+  .calendar-card,.panel-card{box-shadow:none!important}
+  body{background:#fff!important}
+}
+</style>
 </head>
 <body>
+<div class="bg-pattern"></div>
+<div class="wrapper">
 
-  <!-- ── Site Header ── -->
-  <header class="site-header">
-    <div>
-      <h1>অসমীয়া কেলেণ্ডাৰ</h1>
-      <div class="subtitle">Assamese Calendar · Tithi · Purnima · Amabasya</div>
+<header>
+  <div class="header-ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-symbol">✦ ✦ ✦</div>
+    <div class="ornament-line r"></div>
+  </div>
+  <p class="header-assamese">অসমীয়া বৰ্ষপঞ্জী</p>
+  <h1>Assamese <em>Calendar</em></h1>
+  <div class="header-year">২০২৬ · 2026</div>
+  <p class="header-sub">১৪৩২–১৪৩৩ বঙাব্দ (ভাস্কৰাব্দ) &nbsp;·&nbsp; Saka 1947–1948</p>
+  <div><span class="gad-badge">Official GAD Assam Holiday List · Notification No. 221561/440 · 17 Nov 2025</span></div>
+</header>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+<div class="view-toggle-wrap">
+  <div class="view-toggle">
+    <button class="toggle-btn active" onclick="setView('month')">Month View</button>
+    <button class="toggle-btn" onclick="setView('year')">Year View</button>
+  </div>
+  <div style="font-size:12px;color:var(--ink3);font-style:italic;font-family:'Cormorant Garamond',serif" id="todayStr"></div>
+</div>
+
+<div class="year-strip" id="yearStrip"></div>
+
+<!-- MONTH VIEW -->
+<div id="monthView">
+  <div class="cal-nav">
+    <button class="nav-btn" onclick="changeMonth(-1)">◂ Previous</button>
+    <div class="cal-month-title">
+      <div class="cal-month-eng" id="calMonthEng"></div>
+      <div class="cal-month-meta">
+        <span class="cal-month-asm" id="calMonthAsm"></span>
+        <span style="color:var(--border2)">·</span>
+        <span class="cal-month-saka" id="calMonthSaka"></span>
+      </div>
     </div>
-    <div class="header-year" aria-hidden="true">2026</div>
-  </header>
-
-  <!-- ── Controls ── -->
-  <div class="controls">
-    <button class="nav-btn" id="btnPrev" aria-label="Previous month" title="Previous month (←)">&#8249;</button>
-    <select id="monthSelect" aria-label="Select month"></select>
-    <button class="nav-btn" id="btnNext" aria-label="Next month" title="Next month (→)">&#8250;</button>
-    <button class="today-btn" id="btnToday">Today</button>
+    <button class="nav-btn" onclick="changeMonth(1)">Next ▸</button>
   </div>
 
-  <!-- ── Calendar ── -->
-  <main class="cal-wrapper">
-
-    <div class="month-heading">
-      <div>
-        <div class="month-name-en" id="monthNameEn"></div>
-        <div class="month-name-as" id="monthNameAs"></div>
-      </div>
-      <div class="saka-label" id="sakaLabel"></div>
+  <div class="calendar-card fade-in" id="calCard">
+    <div class="cal-header-row">
+      <div class="cal-header-cell sun">Sun</div>
+      <div class="cal-header-cell">Mon</div>
+      <div class="cal-header-cell">Tue</div>
+      <div class="cal-header-cell">Wed</div>
+      <div class="cal-header-cell">Thu</div>
+      <div class="cal-header-cell">Fri</div>
+      <div class="cal-header-cell sat">Sat</div>
     </div>
+    <div class="cal-body" id="calBody"></div>
+  </div>
 
-    <div class="calendar-grid">
-      <!-- Day header row -->
-      <div class="day-headers" id="dayHeaders"></div>
-      <!-- Day cells -->
-      <div class="days-grid" id="daysGrid"></div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#fde8c0"></div>Bihu</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#dff0df"></div>National Holiday</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ede8f8"></div>Religious</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#fde0e0"></div>Regional / Cultural</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#deedf8"></div>Special Day</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#f0f0ff;border-left:3px solid #8080cc"></div>Restricted Holiday</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#fff8e0;border-left:3px dashed var(--gold)"></div>Half Holiday</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#fff8f5;border:1.5px solid var(--red)"></div>Today</div>
+  </div>
+
+  <div class="bottom-panel">
+    <div class="panel-card">
+      <h3>
+        <div class="panel-icon"><svg viewBox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.5a.75.75 0 01.75.75v3.5l2 1.25a.75.75 0 01-.75 1.3l-2.25-1.4A.75.75 0 017.25 9v-4A.75.75 0 018 4.5z"/></svg></div>
+        Holidays &amp; Festivals
+      </h3>
+      <div class="fest-tabs">
+        <button class="fest-tab active" onclick="switchTab('gazetted')">Gazetted</button>
+        <button class="fest-tab" onclick="switchTab('restricted')">Restricted</button>
+        <button class="fest-tab" onclick="switchTab('all')">All</button>
+      </div>
+      <div id="festsList"></div>
     </div>
-
-    <!-- Legend -->
-    <div class="legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#2D1B69;"></div>
-        <span>Today</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#E8F5EE; border:1px solid #15803D;"></div>
-        <span>পূৰ্ণিমা Purnima (Full Moon)</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:#FFF0EB; border:1px solid #C9410B;"></div>
-        <span>অমাবস্যা Amabasya (New Moon)</span>
-      </div>
-      <div class="legend-item" style="margin-left:auto; color:#C9410B;">
-        Sunday
-      </div>
-      <div class="legend-item" style="color:#2D1B69;">
-        Saturday
-      </div>
+    <div class="panel-card">
+      <h3>
+        <div class="panel-icon"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/></svg></div>
+        Season &amp; Context
+      </h3>
+      <div id="seasonPanel"></div>
     </div>
+  </div>
+</div>
 
-    <!-- About section -->
-    <details style="margin-top:24px; font-size:13px; color:#7A6F66; line-height:1.7;">
-      <summary style="cursor:pointer; font-weight:500; color:#2D1B69; margin-bottom:8px;">About this calendar</summary>
-      <p>This is the <strong>Assamese Calendar 2026</strong> (অসমীয়া কেলেণ্ডাৰ ২০২৬), showing all twelve months with their corresponding <strong>Assamese (Saka) dates</strong> and <strong>Tithi</strong> (lunar day) information sourced from the traditional Assamese Panjika.</p>
-      <br/>
-      <p>The Assamese calendar is a solar sidereal calendar used in Assam, India. Each Gregorian month displays the corresponding Assamese month names in the Saka era (শক সম্বৎ). The year 2026 CE spans Saka years <strong>১৪৩২–১৪৩৩</strong>.</p>
-      <br/>
-      <p><strong>Navigation:</strong> Use the ‹ › buttons, the dropdown, or your keyboard arrow keys (← →) to switch months.</p>
-    </details>
+<!-- YEAR VIEW -->
+<div id="yearView" style="display:none">
+  <div class="year-grid" id="yearGrid"></div>
+</div>
 
-  </main>
+<footer>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <p class="footer-text">"আহা বহাগ আহা, আহা সুবাস লৈ আহা।"</p>
+  <p style="font-family:'Hind Siliguri',sans-serif;font-size:11px;color:var(--ink3);margin-top:6px">অসমীয়া বৰ্ষপঞ্জী · 2026 · Source: GAD Assam Notification No. 221561/440 dated 17.11.2025</p>
+</footer>
+</div>
 
-  <!-- ── Scripts ── -->
-  <script src="js/data.js"></script>
-  <script>
-    // Build day header row
-    (function () {
-      const headers = [
-        { as: "দেও", en: "Sun" },
-        { as: "সোম", en: "Mon" },
-        { as: "মঙল", en: "Tue" },
-        { as: "বুধ", en: "Wed" },
-        { as: "বৃহ", en: "Thu" },
-        { as: "শুকুৰ", en: "Fri" },
-        { as: "শনি", en: "Sat" }
-      ];
-      const container = document.getElementById("dayHeaders");
-      headers.forEach(h => {
-        const el = document.createElement("div");
-        el.className = "day-header-cell";
-        el.innerHTML = `${h.as}<div class="dh-en">${h.en}</div>`;
-        container.appendChild(el);
-      });
-    })();
-  </script>
-  <script src="js/app.js"></script>
+<script>
+// ══════════════════════════════════════════════
+// MONTH DATA
+// ══════════════════════════════════════════════
+const MONTHS = [
+  {eng:"January",  asm:"জানুৱাৰী",  saka:"পৌষ – মাঘ",    asmM:["পুহ","মাঘ"],   off:17},
+  {eng:"February", asm:"ফেব্ৰুৱাৰী",saka:"মাঘ – ফাগুন",  asmM:["মাঘ","ফাগুন"], off:17},
+  {eng:"March",    asm:"মাৰ্চ",     saka:"ফাগুন – চ'ত",  asmM:["ফাগুন","চ'ত"],off:17},
+  {eng:"April",    asm:"এপ্ৰিল",   saka:"চ'ত – বহাগ",   asmM:["চ'ত","বহাগ"], off:13},
+  {eng:"May",      asm:"মে'",       saka:"বহাগ – জেঠ",   asmM:["বহাগ","জেঠ"],  off:14},
+  {eng:"June",     asm:"জুন",       saka:"জেঠ – আহাৰ",   asmM:["জেঠ","আহাৰ"],  off:15},
+  {eng:"July",     asm:"জুলাই",    saka:"আহাৰ – শাওণ",  asmM:["আহাৰ","শাওণ"], off:15},
+  {eng:"August",   asm:"আগষ্ট",    saka:"শাওণ – ভাদ",   asmM:["শাওণ","ভাদ"],  off:16},
+  {eng:"September",asm:"ছেপ্টেম্বৰ",saka:"ভাদ – আহিন",  asmM:["ভাদ","আহিন"],  off:16},
+  {eng:"October",  asm:"অক্টোবৰ",  saka:"আহিন – কাতি",  asmM:["আহিন","কাতি"], off:15},
+  {eng:"November", asm:"নৱেম্বৰ",  saka:"কাতি – অঘোণ",  asmM:["কাতি","অঘোণ"], off:16},
+  {eng:"December", asm:"ডিচেম্বৰ", saka:"অঘোণ – পুহ",   asmM:["অঘোণ","পুহ"],  off:15},
+];
 
+const SEASONS = [
+  {name:"Shishir",asm:"শিশিৰ ঋতু",eng:"Winter",desc:"Cool mist settles over the Brahmaputra valley. Mustard fields turn golden and the smell of mahua drifts at dusk. Bhogali Bihu fills the air with the smoke of mejan bonfires.",color:"#0a4a7a"},
+  {name:"Shishir",asm:"শিশিৰ ঋতু",eng:"Late Winter",desc:"Days grow longer slowly. Majuli island lies in meditative stillness. The season is crisp, the tea gardens dormant, waiting.",color:"#0a4a7a"},
+  {name:"Basanta",asm:"বসন্ত ঋতু",eng:"Spring",desc:"Simul trees blaze red on the riverbanks. The koel's first call echoes across bamboo groves. Dol Jatra marks the arrival of colour.",color:"#1a5c2a"},
+  {name:"Basanta",asm:"বসন্ত–গ্ৰীষ্ম ঋতু",eng:"Spring / New Year",desc:"Rongali Bihu — the Assamese New Year — fills the earth with dhol-beats and pepa calls. Three days of joyous holiday; the most jubilant season of the Assamese soul.",color:"#b5290f"},
+  {name:"Grishma",asm:"গ্ৰীষ্ম ঋতু",eng:"Summer",desc:"Heat rises over the tea gardens of Jorhat. Early monsoon clouds gather over the Meghalaya hills to the south.",color:"#c4870a"},
+  {name:"Barsha",asm:"বৰষা ঋতু",eng:"Monsoon Begins",desc:"The Brahmaputra swells with the first rains. Kaziranga's lowlands flood, driving rhinos to higher ground. The valley turns a vivid, living green.",color:"#0a5555"},
+  {name:"Barsha",asm:"বৰষা ঋতু",eng:"Peak Monsoon",desc:"Rain falls in sheets. Paddy fields shimmer in every shade of green — Assam's emerald season. Rivers brim and chars appear and disappear.",color:"#0a5555"},
+  {name:"Barsha",asm:"বৰষা–শৰৎ ঋতু",eng:"Late Monsoon",desc:"Rain begins to ease. Kash grass appears shyly on the Brahmaputra banks. Independence Day is celebrated with flags above the mist.",color:"#4a7a0a"},
+  {name:"Sharad",asm:"শৰৎ ঋতু",eng:"Autumn",desc:"The sky turns an impossibly deep blue. Kash grass sways white on every bank. Durga Puja fills the valley with colour, music and devotion.",color:"#7a5c0a"},
+  {name:"Hemanta",asm:"হেমন্ত ঋতু",eng:"Pre-Winter",desc:"Kati Bihu's earthen lamps flicker in the paddy fields at dusk — a quiet prayer for the harvest. The air grows crisp and the nights long.",color:"#5c1a1a"},
+  {name:"Hemanta",asm:"হেমন্ত ঋতু",eng:"Harvest Season",desc:"Paddy is brought home. Diwali lights glitter across the valley. Guru Nanak Jayanti and Lachit Divas — on the same day — remind Assam of its history and heroes.",color:"#5c1a1a"},
+  {name:"Shishir",asm:"শিশিৱ ঋতু",eng:"Early Winter",desc:"Fog descends on Kamakhya Hill at dawn. Kitchens fill with the smell of til laru and narikol laru as the year quietly prepares for Bhogali.",color:"#0a4a7a"},
+];
+
+const BIHU = [
+  {month:0,day:14,name:"Bhogali Bihu",asm:"ভোগালী বিহু",sub:"মাঘ বিহু — festival of feasting, uruka bonfire night, and mejan"},
+  {month:3,day:14,name:"Rongali Bihu",asm:"ৰঙালী বিহু",sub:"বহাগ বিহু — Assamese New Year, 3 gazetted holidays (14–16 April)"},
+  {month:9,day:18,name:"Kongali Bihu",asm:"কঙালী বিহু",sub:"কাতি বিহু — festival of earthen lamps; quiet and devotional"},
+];
+
+// ══════════════════════════════════════════════
+// OFFICIAL HOLIDAYS — GAD Assam Notification 221561/440 dated 17.11.2025
+// Types: bihu | national | religious | regional | special | restricted | halfday | bank
+// ══════════════════════════════════════════════
+const FESTIVALS = {
+  // GAZETTED HOLIDAYS (Section 1)
+  "2026-01-14":[{n:"Magh Bihu & Tusu Puja",         a:"মাঘ বিহু / ভোগালী বিহু",  t:"bihu",     g:true}],
+  "2026-01-15":[{n:"Magh Bihu (2nd day)",            a:"মাঘ বিহু (২য় দিন)",        t:"bihu",     g:true}],
+  "2026-01-23":[{n:"Netaji's Birthday",              a:"নেতাজীৰ জন্মজয়ন্তী",      t:"national", g:true}],
+  "2026-01-26":[{n:"Republic Day",                   a:"গণতন্ত্ৰ দিৱস",            t:"national", g:true}],
+  "2026-01-27":[{n:"Gwthar Bathou San",              a:"গোৱথাৰ বাথৌ ছান",          t:"regional", g:true}],
+  "2026-01-31":[{n:"Me-Dam-Me-Phi",                  a:"মে-ডাম-মে-ফাই",            t:"regional", g:true}],
+  "2026-02-01":[{n:"Bir Chilaray Divas",             a:"বীৰ চিলাৰায় দিৱস",        t:"regional", g:true}],
+  "2026-03-03":[{n:"Dol Jatra",                      a:"দোল যাত্ৰা",               t:"religious",g:true}],
+  "2026-03-21":[{n:"Id-Ul-Fitr",                     a:"ঈদ-উল-ফিতৰ",               t:"religious",g:true}],
+  "2026-04-03":[{n:"Good Friday",                    a:"গুড ফ্ৰাইডে",              t:"religious",g:true}],
+  "2026-04-14":[{n:"Bohag Bihu — Rongali Bihu",      a:"বহাগ বিহু / ৰঙালী বিহু",  t:"bihu",     g:true}],
+  "2026-04-15":[{n:"Bohag Bihu (2nd day) · Assamese New Year 1433", a:"বহাগ বিহু ২য় দিন · ১৪৩৩ বঙাব্দ আৰম্ভ", t:"bihu", g:true}],
+  "2026-04-16":[{n:"Bohag Bihu (3rd day)",           a:"বহাগ বিহু ৩য় দিন",         t:"bihu",     g:true}],
+  "2026-04-18":[{n:"Tithi of Damodar Deva",         a:"দামোদৰ দেৱৰ তিথি",         t:"regional", g:true}],
+  "2026-04-21":[{n:"Sati Sadhini Divas",             a:"সতী সাধিনী দিৱস",          t:"regional", g:true}],
+  "2026-05-01":[{n:"May Day & Buddha Purnima",       a:"মে দিৱস / বুদ্ধ পূৰ্ণিমা", t:"national", g:true}],
+  "2026-05-27":[{n:"Id-ul-Zuha (Bakr Eid)",          a:"ঈদ-উল-জুহা / বকৰ ঈদ",      t:"religious",g:true}],
+  "2026-06-01":[{n:"Janmotsav of Sri Sri Madhabdeva",a:"মাধৱদেৱৰ জন্মোৎসৱ",        t:"regional", g:true}],
+  "2026-08-15":[{n:"Independence Day",               a:"স্বাধীনতা দিৱস",           t:"national", g:true}],
+  "2026-09-01":[{n:"Tirubhav Tithi of Sri Sri Madhabdeva", a:"মাধৱদেৱৰ তিৰোভাৱ তিথি", t:"regional",g:true}],
+  "2026-09-04":[{n:"Janmastomi",                     a:"জন্মাষ্টমী",               t:"religious",g:true}],
+  "2026-09-12":[{n:"Tirubhav Tithi of Srimanta Sankardeva", a:"শংকৰদেৱৰ তিৰোভাৱ তিথি", t:"regional",g:true}],
+  "2026-09-21":[{n:"Janmotsav of Srimanta Sankardeva",a:"শংকৰদেৱৰ জন্মোৎসৱ",       t:"regional", g:true}],
+  "2026-09-22":[{n:"Karam Puja",                     a:"কৰম পূজা",                 t:"religious",g:true}],
+  "2026-10-02":[{n:"Birthday of Mahatma Gandhi",     a:"মহাত্মা গান্ধীৰ জন্মদিন",  t:"national", g:true}],
+  "2026-10-18":[{n:"Kati Bihu & Durga Puja",         a:"কাতি বিহু / কঙালী বিহু · দুৰ্গা পূজা", t:"bihu", g:true}],
+  "2026-10-19":[{n:"Durga Puja & Vijaya Dashami",    a:"দুৰ্গা পূজা · বিজয়া দশমী", t:"regional", g:true}],
+  "2026-10-20":[{n:"Durga Puja",                     a:"দুৰ্গা পূজা",              t:"regional", g:true}],
+  "2026-10-21":[{n:"Durga Puja",                     a:"দুৰ্গা পূজা",              t:"regional", g:true}],
+  "2026-11-08":[{n:"Kali Puja & Diwali",             a:"কালী পূজা / দীপাৱলী",      t:"religious",g:true}],
+  "2026-11-11":[{n:"Bhatri Dwitiya",                 a:"ভাতৃ দ্বিতীয়া",           t:"religious",g:true}],
+  "2026-11-15":[{n:"Chhath Puja",                    a:"ছট পূজা",                  t:"religious",g:true}],
+  "2026-11-24":[{n:"Guru Nanak's Birthday & Lachit Divas", a:"গুৰু নানকৰ জন্মদিন / লাচিত দিৱস", t:"national",g:true}],
+  "2026-12-02":[{n:"Asom Divas (Su-Ka-Pha Divas)",   a:"অসম দিৱস / চুকাফা দিৱস",  t:"regional", g:true}],
+  "2026-12-25":[{n:"Christmas Day",                  a:"বৰদিন",                    t:"national", g:true}],
+
+  // HALF HOLIDAY (Section 2)
+  "2026-10-25":[{n:"Lakshmi Puja (Half Holiday — 1 PM)",a:"লক্ষ্মী পূজা (আধা বন্ধ)",t:"halfday",  g:false}],
+
+  // BANK HOLIDAY (Section 3a)
+  "2026-04-01":[{n:"Annual Closing of Bank Accounts", a:"বেংক বাৰ্ষিক হিচাপ বন্ধ",  t:"bank",     g:false}],
+
+  // RESTRICTED HOLIDAYS (Section 5 — 2 per employee)
+  "2026-01-01":[{n:"New Year's Day",                  a:"নতুন বছৰ",                 t:"restricted",g:false}],
+  "2026-01-05":[{n:"Rongker Karkli",                  a:"ৰংকেৰ কাৰক্লি",            t:"restricted",g:false}],
+  "2026-01-13":[{n:"Uruka of Magh Bihu",              a:"মাঘ বিহুৰ উৰুকা",          t:"restricted",g:false}],
+  "2026-01-17":[{n:"Silpi Divas",                     a:"শিল্পী দিৱস",              t:"restricted",g:false}],
+  "2026-01-27b":[{n:"Busu Dima Festival",             a:"বুচু ডিমা উৎসৱ",           t:"restricted",g:false}],
+  "2026-02-04":[{n:"Shab-E-Barat",                    a:"শব-এ-বাৰাত",               t:"restricted",g:false}],
+  "2026-02-15":[{n:"Shivaratri",                      a:"শিৱৰাত্ৰি",                t:"restricted",g:false}],
+  "2026-02-17":[{n:"Karbi-Dehal-Kachir Dom",          a:"কাৰবি-ডিহাল-কাচিৰ ডম",    t:"restricted",g:false}],
+  "2026-02-18":[{n:"Ali Aye Ligang",                  a:"আলি আয়ে লিগাং",           t:"restricted",g:false}],
+  "2026-03-02":[{n:"Khring Khring Baithow Puja",      a:"খ্ৰিং খ্ৰিং বাইথৌ পূজা",  t:"restricted",g:false}],
+  "2026-03-17":[{n:"Lailatur Qadar",                  a:"লাইলাতুল কদৰ",             t:"restricted",g:false}],
+  "2026-03-25":[{n:"Tora Chira Bihu",                 a:"তোৰা চিৰা বিহু",           t:"restricted",g:false}],
+  "2026-03-31":[{n:"Mahavir Jayanti",                 a:"মহাবীৰ জয়ন্তী",           t:"restricted",g:false}],
+  "2026-04-04":[{n:"Easter Saturday",                 a:"ইষ্টাৰ শনিবাৰ",            t:"restricted",g:false}],
+  "2026-04-15b":[{n:"Deuri Bihu",                     a:"দেউৰী বিহু",               t:"restricted",g:false}],
+  "2026-04-18b":[{n:"Birthday of Gurudev Kalicharan Brahma",a:"গুৰুদেৱ কালিচৰণ ব্ৰহ্মৰ জন্মজয়ন্তী",t:"restricted",g:false}],
+  "2026-04-22":[{n:"Tithi of Gopal Dev",              a:"গোপাল দেৱৰ তিথি",          t:"restricted",g:false}],
+  "2026-05-01b":[{n:"Sati Radhika Utsav",             a:"সতী ৰাধিকা উৎসৱ",          t:"restricted",g:false}],
+  "2026-05-16":[{n:"Tithi of Hari Dev",               a:"হৰিদেৱৰ তিথি",             t:"restricted",g:false}],
+  "2026-05-23":[{n:"Birthday of Sri Sri Krishnaguru", a:"শ্ৰী শ্ৰী কৃষ্ণগুৰুৰ জন্মজয়ন্তী",t:"restricted",g:false}],
+  "2026-05-24":[{n:"Motak Roja Swargadeo Sarbananda Singha Divas",a:"মটক ৰজা স্বৰ্গদেউ সৰ্বানন্দ সিংহ দিৱস",t:"restricted",g:false}],
+  "2026-05-31":[{n:"Baikhowa Festival",               a:"বৈখোৱা উৎসৱ",              t:"restricted",g:false}],
+  "2026-06-20":[{n:"Death Anniversary of Bishnu Prasad Rabha",a:"বিষ্ণু প্ৰসাদ ৰাভাৰ মৃত্যুবাৰ্ষিকী",t:"restricted",g:false}],
+  "2026-06-30":[{n:"Hul Divas",                       a:"হুল দিৱস",                 t:"restricted",g:false}],
+  "2026-07-13":[{n:"Birthday of Bhanu Bhakta Acharya (Nepali Poet)",a:"ভানুভক্ত আচাৰ্যৰ জন্মজয়ন্তী",t:"restricted",g:false}],
+  "2026-08-13":[{n:"Death Anniversary of Bir Tikendrajit",a:"বীৰ টিকেন্দ্ৰজিতৰ মৃত্যুবাৰ্ষিকী",t:"restricted",g:false}],
+  "2026-08-26":[{n:"Fateha-e-DwazDaham",              a:"ফাতেহা-এ-দোৱাজদহম",        t:"restricted",g:false}],
+  "2026-09-15":[{n:"Nau Khai Festival",               a:"নৱ খাই উৎসৱ",              t:"restricted",g:false}],
+  "2026-09-16":[{n:"Birthday of Sri Sri Thakur Anukul Chandra",a:"শ্ৰীশ্ৰী ঠাকুৰ অনুকূলচন্দ্ৰৰ জন্মজয়ন্তী",t:"restricted",g:false}],
+  "2026-11-01":[{n:"Kuki Chavang Kut",                a:"কুকি চাভাং কুট",           t:"restricted",g:false}],
+  "2026-11-07":[{n:"Wangala Festival",                a:"ৱাংগালা উৎসৱ",             t:"restricted",g:false}],
+  "2026-11-11b":[{n:"Abhibhav Tithi of Sri Sri Bhubaneswar Sadhu Thakur",a:"ভুৱনেশ্বৰ সাধু ঠাকুৰৰ অভিভাৱ তিথি",t:"restricted",g:false}],
+  "2026-11-19":[{n:"Bir Raghav Moran Divas",          a:"বীৰ ৰাঘৱ মৰান দিৱস",       t:"restricted",g:false}],
+  "2026-11-24b":[{n:"Death Anniversary of Guru Teg Bahadur Ji",a:"গুৰু তেগ বাহাদুৰ জীৰ মৃত্যুবাৰ্ষিকী",t:"restricted",g:false}],
+  "2026-12-05":[{n:"Sikpui Ruoi (Harvest Festival — Hmar Community)",a:"চিকপুই ৰুঅই উৎসৱ",t:"restricted",g:false}],
+  "2026-12-10":[{n:"Martyr's Day",                    a:"শ্বহীদ দিৱস",              t:"restricted",g:false}],
+  "2026-12-19":[{n:"Death Anniversary of Shree Shree Aniruddhadev",a:"অনিৰুদ্ধদেৱৰ মৃত্যুতিথি",t:"restricted",g:false}],
+  "2026-12-22":[{n:"Gaan Ngai",                       a:"গান নগাই",                 t:"restricted",g:false}],
+  "2026-12-24":[{n:"Christmas Eve",                   a:"বৰদিনৰ আগদিনা",            t:"restricted",g:false}],
+};
+
+// ══════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════
+const AN=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+function toAN(n){return String(n).split('').map(d=>AN[+d]).join('')}
+function dKey(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function asmDay(mi,d){
+  const m=MONTHS[mi];
+  return d<m.off?`${toAN(d+30-m.off+1)} ${m.asmM[0]}`:`${toAN(d-m.off+1)} ${m.asmM[1]}`
+}
+
+// Get all festivals for a date key (handle duplicate-key workarounds like "2026-01-27b")
+function getFests(key){
+  let r=[];
+  // exact key
+  if(FESTIVALS[key]) r=r.concat(FESTIVALS[key]);
+  // suffix variants
+  ['b','c','d'].forEach(sfx=>{
+    if(FESTIVALS[key+sfx]) r=r.concat(FESTIVALS[key+sfx]);
+  });
+  return r;
+}
+
+const TC={bihu:"ftag-bihu",national:"ftag-national",religious:"ftag-religious",regional:"ftag-regional",special:"ftag-special",restricted:"ftag-restricted",halfday:"ftag-halfday",bank:"ftag-bank"};
+const BC={bihu:"badge-bihu",national:"badge-national",religious:"badge-religious",regional:"badge-regional",special:"badge-special",restricted:"badge-restricted",halfday:"badge-halfday",bank:"badge-bank"};
+const DOT={bihu:"#c4870a",national:"#2e8b45",religious:"#7a5abc",regional:"#b54040",special:"#3a80c0",restricted:"#6060b0",halfday:"#a0800a",bank:"#2a7a2a"};
+
+const today=new Date();
+let currentMonth=(today.getFullYear()===2026)?today.getMonth():0;
+let currentView='month';
+let currentTab='gazetted';
+
+// ══════════════════════════════════════════════
+// YEAR STRIP
+// ══════════════════════════════════════════════
+function renderYearStrip(){
+  const strip=document.getElementById('yearStrip');
+  strip.innerHTML='';
+  MONTHS.forEach((m,i)=>{
+    const dim=new Date(2026,i+1,0).getDate();
+    const seen=new Set();
+    const dots=[];
+    for(let d=1;d<=dim;d++){
+      const k=dKey(2026,i,d);
+      getFests(k).forEach(f=>{if(!seen.has(f.t)&&dots.length<4){seen.add(f.t);dots.push(f.t)}});
+    }
+    const dotsHtml=dots.map(t=>`<div class="strip-dot" style="background:${DOT[t]}"></div>`).join('');
+    const el=document.createElement('div');
+    el.className='strip-month'+(i===currentMonth?' active':'');
+    el.innerHTML=`<div class="strip-month-name">${m.eng.slice(0,3)}</div><span class="strip-asm-name">${m.asm}</span><div class="strip-dots">${dotsHtml}</div>`;
+    el.onclick=()=>{currentMonth=i;renderAll()};
+    strip.appendChild(el);
+  });
+}
+
+// ══════════════════════════════════════════════
+// MONTH CALENDAR
+// ══════════════════════════════════════════════
+function renderMonthCal(){
+  const m=MONTHS[currentMonth];
+  document.getElementById('calMonthEng').textContent=m.eng+' 2026';
+  document.getElementById('calMonthAsm').textContent=m.asm;
+  document.getElementById('calMonthSaka').textContent=m.saka;
+  const firstDay=new Date(2026,currentMonth,1).getDay();
+  const dim=new Date(2026,currentMonth+1,0).getDate();
+  const isNow=today.getFullYear()===2026&&today.getMonth()===currentMonth;
+
+  // 2nd & 4th Saturdays are holidays per GAD notification
+  function is2nd4thSat(d){
+    if(new Date(2026,currentMonth,d).getDay()!==6) return false;
+    let satCount=0;
+    for(let x=1;x<=d;x++){if(new Date(2026,currentMonth,x).getDay()===6) satCount++;}
+    return satCount===2||satCount===4;
+  }
+
+  const body=document.getElementById('calBody');
+  body.innerHTML='';
+  for(let i=0;i<firstDay;i++){const c=document.createElement('div');c.className='cal-cell empty';body.appendChild(c)}
+
+  for(let d=1;d<=dim;d++){
+    const dow=new Date(2026,currentMonth,d).getDay();
+    const key=dKey(2026,currentMonth,d);
+    const fests=getFests(key);
+    const gazetted=fests.filter(f=>f.g);
+    const restricted=fests.filter(f=>!f.g);
+    const isTd=isNow&&d===today.getDate();
+    const isSat24=is2nd4thSat(d);
+
+    const c=document.createElement('div');
+    let cls='cal-cell';
+    if(isTd) cls+=' today-cell';
+    if(dow===0) cls+=' sun-cell';
+    if(dow===6) cls+=' sat-cell';
+    if(gazetted.length||dow===0||isSat24) cls+=' holiday-cell';
+    else if(restricted.length) cls+=' restricted-cell';
+    c.className=cls;
+
+    const numHtml=isTd?`<span class="today-circle">${d}</span>`:`<div class="cell-greg">${d}${isSat24?'<span style="font-size:8px;color:var(--green2);font-weight:600;margin-left:3px;">H</span>':''}</div>`;
+
+    const showFests=fests.slice(0,3);
+    const tagsHtml=showFests.map(f=>`<span class="ftag ${TC[f.t]}" title="${f.n}">${f.n}</span>`).join('');
+
+    c.innerHTML=`${numHtml}<div class="cell-asm">${asmDay(currentMonth,d)}</div><div class="cell-tags">${tagsHtml}</div>`;
+    body.appendChild(c);
+  }
+
+  const card=document.getElementById('calCard');
+  card.classList.remove('fade-in');
+  void card.offsetWidth;
+  card.classList.add('fade-in');
+}
+
+// ══════════════════════════════════════════════
+// FESTIVALS PANEL
+// ══════════════════════════════════════════════
+function switchTab(tab){
+  currentTab=tab;
+  document.querySelectorAll('.fest-tab').forEach((b,i)=>{
+    b.classList.toggle('active',['gazetted','restricted','all'][i]===tab);
+  });
+  renderFestPanel();
+}
+
+function renderFestPanel(){
+  const dim=new Date(2026,currentMonth+1,0).getDate();
+  let items=[];
+  for(let d=1;d<=dim;d++){
+    const k=dKey(2026,currentMonth,d);
+    getFests(k).forEach(f=>{
+      if(currentTab==='gazetted'&&!f.g) return;
+      if(currentTab==='restricted'&&f.g) return;
+      items.push({d,f});
+    });
+  }
+  const el=document.getElementById('festsList');
+  if(!items.length){
+    el.innerHTML='<div style="font-size:13px;color:var(--ink3);font-style:italic;padding:8px 0;">No entries for this filter.</div>';
+    return;
+  }
+  el.innerHTML=items.map(({d,f})=>`
+    <div class="fest-item">
+      <div class="fest-item-date">${d}</div>
+      <div class="fest-item-body">
+        <div class="fest-item-name">${f.n}</div>
+        <div class="fest-item-asm">${f.a}</div>
+      </div>
+      <span class="fest-item-badge ${BC[f.t]}">${f.t}</span>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════
+// SEASON PANEL
+// ══════════════════════════════════════════════
+function renderSeasonPanel(){
+  const s=SEASONS[currentMonth];
+  const bihu=BIHU.find(b=>b.month===currentMonth);
+  const bihuHtml=bihu?`<div class="bihu-callout"><div class="bihu-label">✦ Bihu this month</div><div class="bihu-name">${bihu.name}</div><div class="bihu-asm">${bihu.asm}</div><div style="font-size:11px;color:var(--ink3);margin-top:6px;font-style:italic;">${bihu.sub}</div></div>`:'';
+  document.getElementById('seasonPanel').innerHTML=`
+    <div style="text-align:center;padding:10px 0 8px">
+      <div class="season-name" style="color:${s.color}">${s.name}</div>
+      <div class="season-asm">${s.asm}</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-top:4px">${s.eng}</div>
+    </div>
+    <p class="season-desc">${s.desc}</p>
+    ${bihuHtml}
+    <div style="margin-top:14px;padding:10px 12px;background:var(--parchment2);border-radius:8px;font-size:11px;color:var(--ink3);line-height:1.6">
+      <strong style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink2)">GAD Note</strong><br>
+      All 2nd &amp; 4th Saturdays are declared holidays. Each employee may avail 2 Restricted Holidays from the list of 39 notified restricted holidays.
+    </div>`;
+}
+
+// ══════════════════════════════════════════════
+// YEAR GRID
+// ══════════════════════════════════════════════
+function renderYearGrid(){
+  const grid=document.getElementById('yearGrid');
+  grid.innerHTML='';
+  const isNow=today.getFullYear()===2026;
+  MONTHS.forEach((m,mi)=>{
+    const firstDay=new Date(2026,mi,1).getDay();
+    const dim=new Date(2026,mi+1,0).getDate();
+    let cells='';
+    for(let i=0;i<firstDay;i++) cells+=`<div class="mini-cell empty">.</div>`;
+    for(let d=1;d<=dim;d++){
+      const key=dKey(2026,mi,d);
+      const fests=getFests(key);
+      const isTd=isNow&&mi===today.getMonth()&&d===today.getDate();
+      const dow=new Date(2026,mi,d).getDay();
+      let cls='mini-cell';
+      if(isTd) cls+=' today-mini';
+      else if(fests.filter(f=>f.g).length) cls+=' has-fest';
+      else if(dow===0) cls+=' sun-mini';
+      cells+=`<div class="${cls}">${d}</div>`;
+    }
+    const div=document.createElement('div');
+    div.className='mini-month';
+    div.innerHTML=`
+      <div class="mini-header"><span class="mini-eng">${m.eng}</span><span class="mini-asm">${m.asm}</span></div>
+      <div class="mini-grid">
+        <div class="mini-day-header s">S</div><div class="mini-day-header">M</div><div class="mini-day-header">T</div>
+        <div class="mini-day-header">W</div><div class="mini-day-header">T</div><div class="mini-day-header">F</div>
+        <div class="mini-day-header">S</div>${cells}
+      </div>`;
+    div.onclick=()=>{currentMonth=mi;setView('month')};
+    grid.appendChild(div);
+  });
+}
+
+// ══════════════════════════════════════════════
+// VIEW & NAV
+// ══════════════════════════════════════════════
+function setView(v){
+  currentView=v;
+  document.getElementById('monthView').style.display=v==='month'?'':'none';
+  document.getElementById('yearView').style.display=v==='year'?'':'none';
+  document.querySelectorAll('.toggle-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&v==='month')||(i===1&&v==='year')));
+  if(v==='year') renderYearGrid();
+}
+
+function changeMonth(dir){currentMonth=(currentMonth+dir+12)%12;renderAll()}
+
+function renderTodayStr(){
+  if(today.getFullYear()===2026){
+    const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};
+    document.getElementById('todayStr').textContent='আজি · '+today.toLocaleDateString('en-IN',opts);
+  }
+}
+
+function renderAll(){
+  renderYearStrip();
+  if(currentView==='month'){renderMonthCal();renderFestPanel();renderSeasonPanel()}
+  else renderYearGrid();
+}
+
+renderTodayStr();
+renderAll();
+</script>
 </body>
 </html>
