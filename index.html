@@ -155,13 +155,103 @@ header h1 em{font-style:italic;color:var(--red);font-weight:400}
 /* FOOTER */
 footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
 .footer-text{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--ink3)}
-@media(max-width:700px){
+/* ── TABLET (≤ 768px) ───────────────────────────────── */
+@media(max-width:768px){
   .bottom-panel{grid-template-columns:1fr}
-  .year-grid{grid-template-columns:repeat(2,1fr)}
-  .year-strip{grid-template-columns:repeat(6,1fr)}
-  .year-strip .strip-month:nth-child(n+7){display:none}
-  header h1{font-size:28px}
-  .fest-tabs{flex-wrap:wrap}
+  .year-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── MOBILE (≤ 600px) ───────────────────────────────── */
+@media(max-width:600px){
+  /* Wrapper */
+  .wrapper{padding:0 12px 40px}
+
+  /* Header */
+  header{padding:28px 8px 18px}
+  .ornament-line{width:32px}
+  .ornament-symbol{font-size:16px;letter-spacing:3px}
+  .header-assamese{font-size:13px;letter-spacing:1px}
+  header h1{font-size:clamp(26px,8vw,36px);letter-spacing:-.5px}
+  .header-sub{font-size:13px}
+  .gad-badge{font-size:10px;padding:4px 10px;text-align:center;white-space:normal;line-height:1.4}
+
+  /* Year strip — scrollable row instead of hiding months */
+  .year-strip{
+    grid-template-columns:repeat(12,minmax(56px,1fr));
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    border-radius:8px;
+    margin-bottom:16px;
+  }
+  .year-strip::-webkit-scrollbar{display:none}
+  .strip-month{padding:8px 6px 6px;min-width:56px}
+  .strip-month-name{font-size:9px}
+  .strip-asm-name{font-size:9px}
+  .strip-dots{gap:1px;margin-top:3px}
+  .strip-dot{width:4px;height:4px}
+
+  /* View toggle row */
+  .view-toggle-wrap{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:14px}
+  #todayStr{font-size:11px}
+  .toggle-btn{padding:7px 14px;font-size:11px}
+
+  /* Month navigation */
+  .cal-nav{margin-bottom:12px}
+  .nav-btn{padding:7px 10px;font-size:12px;gap:4px}
+  .cal-month-eng{font-size:26px}
+  .cal-month-asm{font-size:14px}
+  .cal-month-saka{font-size:11px}
+
+  /* Calendar cells — compact for small screens */
+  .cal-header-cell{padding:9px 2px;font-size:9.5px;letter-spacing:.5px}
+  .cal-cell{min-height:58px;padding:5px 4px 4px}
+  .cell-greg{font-size:13px}
+  .today-circle{width:24px;height:24px;font-size:12px}
+  .cell-asm{font-size:8.5px;margin-top:1px}
+  .cell-tags{margin-top:3px;gap:1px}
+  .ftag{font-size:7.5px;padding:1px 4px}
+
+  /* Legend */
+  .legend{gap:7px;padding:10px 12px}
+  .legend-item{font-size:10px}
+  .legend-swatch{width:10px;height:10px}
+
+  /* Bottom panels */
+  .bottom-panel{grid-template-columns:1fr;gap:14px;margin-top:14px}
+  .panel-card{padding:14px 14px}
+  .panel-card h3{font-size:16px;margin-bottom:10px}
+
+  /* Festival tabs */
+  .fest-tabs{flex-wrap:wrap;gap:4px;border:none;background:transparent;border-radius:0;margin-bottom:10px}
+  .fest-tab{border:1px solid var(--border2)!important;border-radius:6px!important;padding:5px 12px;font-size:11px}
+  .fest-tab.active{background:var(--red);border-color:var(--red)!important;color:#fff}
+
+  /* Festival list items */
+  .fest-item{padding:7px 0}
+  .fest-item-date{font-size:16px;min-width:28px}
+  .fest-item-name{font-size:11px}
+  .fest-item-asm{font-size:10px}
+  .fest-item-badge{font-size:8px;padding:2px 6px}
+
+  /* Season panel */
+  .season-name{font-size:24px}
+  .season-asm{font-size:15px}
+  .season-desc{font-size:14px}
+  .bihu-callout{padding:10px 12px}
+  .bihu-name{font-size:17px}
+
+  /* Year grid */
+  .year-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .mini-header{padding:6px 8px}
+  .mini-eng{font-size:10px}
+  .mini-asm{font-size:10px}
+  .mini-grid{padding:4px 3px 6px;gap:0}
+  .mini-day-header{font-size:7px;padding:1px 0}
+  .mini-cell{font-size:8.5px;padding:2px 0}
+
+  /* Divider */
+  .divider{margin:14px 0}
 }
 @media print{
   .bg-pattern,.view-toggle-wrap,.cal-nav,.year-strip{display:none!important}
