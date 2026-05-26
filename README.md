@@ -2,7 +2,7 @@
 
 A beautiful, fully offline web app displaying the **official 2026 holiday calendar for the State of Assam**, based on the Government of Assam General Administration Department notification.
 
-🌐 **Live Demo:** [View on GitHub Pages](https://YOUR-USERNAME.github.io/assamese-calendar-2026/)
+🌐 **Live Demo:** [View on GitHub Pages](https://imanabsarmah.github.io/assamese-calendar-2026/)
 
 ---
 
@@ -40,7 +40,7 @@ A beautiful, fully offline web app displaying the **official 2026 holiday calend
 
 ### Option 1 — Just open it
 ```bash
-git clone https://github.com/YOUR-USERNAME/assamese-calendar-2026.git
+git clone https://github.com/imanabsarmah/assamese-calendar-2026.git
 cd assamese-calendar-2026
 open index.html   # macOS
 # or double-click index.html in your file manager
@@ -57,7 +57,7 @@ python -m http.server 8000
 1. Push this repo to GitHub
 2. Go to **Settings → Pages**
 3. Set source to **Deploy from branch → main → / (root)**
-4. Your calendar will be live at `https://YOUR-USERNAME.github.io/assamese-calendar-2026/`
+4. Your calendar will be live at `https://imanabsarmah.github.io/assamese-calendar-2026/`
 
 ---
 
