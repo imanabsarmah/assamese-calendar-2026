@@ -368,18 +368,18 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid v
 // MONTH DATA
 // ══════════════════════════════════════════════
 const MONTHS = [
-  {eng:"January",  asm:"জানুৱাৰী",  saka:"পৌষ – মাঘ",    asmM:["পুহ","মাঘ"],   off:17},
-  {eng:"February", asm:"ফেব্ৰুৱাৰী",saka:"মাঘ – ফাগুন",  asmM:["মাঘ","ফাগুন"], off:17},
-  {eng:"March",    asm:"মাৰ্চ",     saka:"ফাগুন – চ'ত",  asmM:["ফাগুন","চ'ত"],off:17},
-  {eng:"April",    asm:"এপ্ৰিল",   saka:"চ'ত – বহাগ",   asmM:["চ'ত","বহাগ"], off:13},
-  {eng:"May",      asm:"মে'",       saka:"বহাগ – জেঠ",   asmM:["বহাগ","জেঠ"],  off:14},
-  {eng:"June",     asm:"জুন",       saka:"জেঠ – আহাৰ",   asmM:["জেঠ","আহাৰ"],  off:15},
-  {eng:"July",     asm:"জুলাই",    saka:"আহাৰ – শাওণ",  asmM:["আহাৰ","শাওণ"], off:15},
-  {eng:"August",   asm:"আগষ্ট",    saka:"শাওণ – ভাদ",   asmM:["শাওণ","ভাদ"],  off:16},
-  {eng:"September",asm:"ছেপ্টেম্বৰ",saka:"ভাদ – আহিন",  asmM:["ভাদ","আহিন"],  off:16},
-  {eng:"October",  asm:"অক্টোবৰ",  saka:"আহিন – কাতি",  asmM:["আহিন","কাতি"], off:15},
-  {eng:"November", asm:"নৱেম্বৰ",  saka:"কাতি – অঘোণ",  asmM:["কাতি","অঘোণ"], off:16},
-  {eng:"December", asm:"ডিচেম্বৰ", saka:"অঘোণ – পুহ",   asmM:["অঘোণ","পুহ"],  off:15},
+  {eng:"January",  asm:"জানুৱাৰী",  saka:"পৌষ – মাঘ"},
+  {eng:"February", asm:"ফেব্ৰুৱাৰী",saka:"মাঘ – ফাগুন"},
+  {eng:"March",    asm:"মাৰ্চ",     saka:"ফাগুন – চ'ত"},
+  {eng:"April",    asm:"এপ্ৰিল",   saka:"চ'ত – বহাগ"},
+  {eng:"May",      asm:"মে'",       saka:"বহাগ – জেঠ"},
+  {eng:"June",     asm:"জুন",       saka:"জেঠ – আহাৰ"},
+  {eng:"July",     asm:"জুলাই",    saka:"আহাৰ – শাওণ"},
+  {eng:"August",   asm:"আগষ্ট",    saka:"শাওণ – ভাদ"},
+  {eng:"September",asm:"ছেপ্টেম্বৰ",saka:"ভাদ – আহিন"},
+  {eng:"October",  asm:"অক্টোবৰ",  saka:"আহিন – কাতি"},
+  {eng:"November", asm:"নৱেম্বৰ",  saka:"কাতি – অঘোণ"},
+  {eng:"December", asm:"ডিচেম্বৰ", saka:"অঘোণ – পুহ"},
 ];
 
 const SEASONS = [
@@ -499,9 +499,48 @@ const FESTIVALS = {
 const AN=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
 function toAN(n){return String(n).split('').map(d=>AN[+d]).join('')}
 function dKey(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+
+// Assamese Calendar (Bhaskarabda) 2026 month boundaries.
+// Source: GAD Assam Notification No. 221561/440 dated 17.11.2025.
+// The notification prints official Assamese dates beside holiday dates; these
+// starts are derived from those official rows, replacing rough monthly offsets.
+const ASM_MS_PER_DAY=24*60*60*1000;
+const ASM_MONTH_STARTS=[
+  {date:"2025-12-17", month:"পুহ",   year:1432},
+  {date:"2026-01-15", month:"মাঘ",   year:1432},
+  {date:"2026-02-14", month:"ফাগুন", year:1432},
+  {date:"2026-03-16", month:"চ'ত",   year:1432},
+  {date:"2026-04-15", month:"বহাগ",  year:1433},
+  {date:"2026-05-16", month:"জেঠ",   year:1433},
+  {date:"2026-06-16", month:"আহাৰ",  year:1433},
+  {date:"2026-07-17", month:"শাওণ",  year:1433},
+  {date:"2026-08-19", month:"ভাদ",   year:1433},
+  {date:"2026-09-19", month:"আহিন",  year:1433},
+  {date:"2026-10-19", month:"কাতি",  year:1433},
+  {date:"2026-11-18", month:"অঘোণ", year:1433},
+  {date:"2026-12-17", month:"পুহ",   year:1433},
+].map(({date,month,year})=>{
+  const [y,m,d]=date.split('-').map(Number);
+  return {time:Date.UTC(y,m-1,d), month, year};
+});
+
+function asmDate(y,m,d){
+  const time=Date.UTC(y,m,d);
+  let start=ASM_MONTH_STARTS[0];
+  for(const candidate of ASM_MONTH_STARTS){
+    if(candidate.time>time) break;
+    start=candidate;
+  }
+  return {
+    day:Math.floor((time-start.time)/ASM_MS_PER_DAY)+1,
+    month:start.month,
+    year:start.year,
+  };
+}
+
 function asmDay(mi,d){
-  const m=MONTHS[mi];
-  return d<m.off?`${toAN(d+30-m.off+1)} ${m.asmM[0]}`:`${toAN(d-m.off+1)} ${m.asmM[1]}`
+  const a=asmDate(2026,mi,d);
+  return `${toAN(a.day)} ${a.month}`
 }
 
 // Get all festivals for a date key (handle duplicate-key workarounds like "2026-01-27b")
